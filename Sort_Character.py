@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 
-
+fname = 'OHXDEN_A.csv'
 df_B = pd.read_csv(fname, low_memory = False)
     
 name = df_B['SEQN']
@@ -19,12 +19,12 @@ name = df_B['SEQN']
 CSC = df_B.filter(like="CSC")
 
 
-#    
-#    
-#restoration = []
-#for row in CTC.iterrows():
-#    count = 0
-#    for tooth in row[1]:
-#        if tooth == 'R' or tooth == 'T' or tooth == 'X':
-#            count = count + 1
-#    restoration.append(count)
+    
+   
+restoration = []
+for row in CSC.iterrows():
+    count = 0
+    for tooth in row[1]:
+        if int(tooth) == 56789:
+            print tooth
+        
