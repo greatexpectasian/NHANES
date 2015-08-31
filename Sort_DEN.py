@@ -29,14 +29,16 @@ def get_restoration(fname):
         for tooth in row[1]:
             if tooth == 'R' or tooth == 'T' or tooth == 'X':
                 count = count + 1
+            if not isinstance(tooth, str):
+                count = nan
         restoration.append(count)
     
-    df_rest = pd.DataFrame(restoration, columns = ['restorations'])
+    df_rest = pd.DataFrame(restoration, columns = ['Restoration_Num'])
     df_rest['SEQN'] = name
     
     # sort
     grouped = get_sort(restoration)
-    df_rest['Grouped Restoration'] = grouped
+    df_rest['Restoration_Group'] = grouped
     
     #output to excel
     out_name = 'mod_'+ fname[:8] + '.xls'
@@ -53,22 +55,24 @@ def get_sort(rest_data):
             sorter.append(0)
         elif x > 0 and x <= 3:
             sorter.append(1)
-        else:
+        elif x > 3:
             sorter.append(2)
+        else:
+            sorter.append(nan)
     return sorter
     
 # get restoration for all:
 
 a = get_restoration('OHXDEN_A.csv')
-plt.subplot(411)
-plt.hist(a)
+#plt.subplot(411)
+#plt.hist(a)
 b = get_restoration('OHXDEN_B.csv')
-plt.subplot(412)
-plt.hist(b)
+#plt.subplot(412)
+#plt.hist(b)
 c = get_restoration('OHXDEN_C.csv')
-plt.subplot(413)
-plt.hist(c)
+#plt.subplot(413)
+#plt.hist(c)
 d = get_restoration('OHXDEN_G.csv')
-plt.subplot(414)
-plt.hist(d)
+#plt.subplot(414)
+#plt.hist(d)
 

@@ -25,6 +25,6 @@ restoration = []
 for row in CSC.iterrows():
     count = 0
     for tooth in row[1]:
-        if int(tooth) == 56789:
-            print tooth
-        
+        #if tooth == 56789:
+            
+        if tooth 
