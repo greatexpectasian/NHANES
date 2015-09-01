@@ -35,12 +35,39 @@ def get_sr(fname):
         
     df_sr = pd.DataFrame(sr, columns = ['Surface_Rest_num'])
     df_sr['SEQN'] = name
-        
+    
+    grouped = get_sort(sr)
+    df_sr['Surface_Rest_Group'] = grouped
+
     #output to excel
     out_name = 'mod_surface'+ fname[:8] + '.xls'
     df_sr.to_excel(out_name)
     
     return sr
+
+def get_sort(rest_data):
+    sorter = []
+    for x in rest_data:
+        if x == 0:
+            sorter.append(0)
+        elif x > 0 and x <= 8:
+            sorter.append(1)
+        elif x > 8:
+            sorter.append(2)
+        else:
+            sorter.append(nan)
+    return sorter
+
+
+
+
+
+
+
+
+
+
+
 
 a = get_sr('OHXDEN_A.csv')
 b = get_sr('OHXDEN_B.csv')
