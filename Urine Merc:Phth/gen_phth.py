@@ -20,34 +20,57 @@ F = pd.read_csv('PHTHTE_F.csv')
 G = pd.read_csv('PHTHTE_G.csv')
 
 def get_trend(column):
-    A_m = (A[column])
+    
+    B_SEQN = B['SEQN']
+    C_SEQN = C['SEQN']
+    D_SEQN = D['SEQN']
+    E_SEQN = E['SEQN']
+    F_SEQN = F['SEQN']
+    G_SEQN = G['SEQN']
+
     B_m = (B[column])
     C_m = (C[column])
     D_m = (D[column])
     E_m = (E[column])
     F_m = (F[column])
-    #G_m = mean(G[column])
-    
-    A_s = std(A[column])
-    B_s = std(B[column])
-    C_s = std(C[column])
-    D_s = std(D[column])
-    E_s = std(E[column])
-    F_s = std(F[column])
-    #G_s = std(G[column])
+    G_m = (G[column])
     
     
-    X = [1999, 2001, 2003, 2005, 2007, 2009]
-    Y = [A_m, B_m, C_m, D_m, E_m, F_m]
-    Y_s = [A_s, B_s, C_s, D_s, E_s, F_s]
-    return (X, Y, Y_s)
-
+    
+    X = ['SEQN2001', 2001, 'SEQN2003', 2003, 'SEQN2005', 2005, 'SEQN2007',\
+                                    2007, 'SEQN2009', 2009, 'SEQN2011', 2011]
+    Y = [B_SEQN, B_m, C_SEQN, C_m, D_SEQN, D_m, E_SEQN,E_m, F_SEQN, \
+                                                            F_m, G_SEQN, G_m]
+    df = pd.DataFrame()
+    
+    count = 0
+    for value in X:
+        df[value] = Y[count]
+        count = count + 1
+    
+    
+    to_name  = column + '.csv'
+    df.to_csv(to_name)
+    return (df)
+    
 ##########################################
 
-data = get_trend('WTSPH2YR')
+MEP = get_trend('URXMEP')
+MHP = get_trend('URXMHP')
+MNP = get_trend('URXMNP')
+MNM = get_trend('URXMNM')
+MHH = get_trend('URXMHH')
+MOH = get_trend('URXMOH')
+MIB = get_trend('URXMIB')
 
-plt.boxplot(data[1], labels = data[0], showmeans=True)
-plt.ylim([0, 2])
+
+
+# put into datafile for output
+
+
+## reorganize data for jmp
+#plt.boxplot(data[1], labels = data[0], showmeans=True)
+#plt.ylim([0, 2])
 
 
 
